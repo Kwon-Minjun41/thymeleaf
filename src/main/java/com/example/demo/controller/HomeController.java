@@ -107,9 +107,15 @@ public class HomeController {
       return "s_result";
   }
   @GetMapping("/user")
-    public String user(Model model,@ModelAttribute DataDto dto) {
+    public String user(Model model) {
         model.addAttribute("user", new DataDto("cha",20,"안산"));
-      System.out.println("name: "+dto.getName());
+        return "user";
+    }
+    @PostMapping("/user")
+    public String user(@ModelAttribute DataDto dto, Model model) {
+        System.out.println("name: "+dto.getName());
+        System.out.println("age: "+dto.getAge());
+        System.out.println("address: "+dto.getAddress());
         return "user";
     }
 }
