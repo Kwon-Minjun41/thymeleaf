@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>t_output.html</h1>
+<h1>th:text 와 th:utext의 차이</h1>
+<div th:text="${'innerText: '+ htmlStr}">innerText: </div>
+<div th:text="|innerText: ${htmlStr}|">innerText: </div>
+<div>innerText: [[${htmlStr}]] </div>
+<div th:utext="${'innerHTML: ' + htmlStr}">innerHTML: </div>
+<div>innerHTML: [(${htmlStr})] </div>
+<h2>Map 데이터 출력</h2>
+<p th:text="${'이름: '+mapData.get('name')}"></p>
+<p th:text="${'나이: '+mapData.age}"></p>
+<p th:text="${'주소: '+mapData.addr}"></p>
+<hr>
+<h2>Dto 데이터 출력</h2>
+<p th:text="${dtoData.getName()}"></p>
+<p th:text="${dtoData.getAge()}"></p>
+<p th:text="${dtoData.getAddress()}"></p>
+<h2>Dto 데이터 출력2</h2>
+<th:block th:object="${dtoData}">
+    <p th:text="*{name}"></p>
+    <p th:text="*{age}"></p>
+    <p th:text="*{address}"></p>
+</th:block>
+<hr>
+<a th:href="@{/t_control}">thymeleaf 제어문</a>
+<script th:inline="javascript">
+//  th:inline="javascript": js에서 타임리미트요소 처리
+    const msg = /*[[${msg}]]*/ 'hello'
+    if (msg!=null){
+        alert(msg)
+    }
+console.log([[${dtoData}]]) //dto -> json -> js,jsp 에러 toJson변환 -> json -> js
+console.log([[${mapData}]])
+</script>
+
+</body>
+</html>
